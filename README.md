@@ -5,13 +5,9 @@
 
 ## 專案畫面
 
-![image](https://github.com/pierceshih15/restaurantList/blob/master/public/img/homePage.png)
+![image](https://github.com/Chingsan0722/ac-restaurant-list/blob/main/homepage.png)
 
-![image](https://github.com/pierceshih15/restaurantList/blob/master/public/img/restaurantInfo.png)
-
-![image](https://github.com/pierceshih15/restaurantList/blob/master/public/img/addNewRestaurant.png)
-
-![image](https://github.com/pierceshih15/restaurantList/blob/master/public/img/loginPage.png)
+![image](https://github.com/Chingsan0722/ac-restaurant-list/blob/main/description.png)
 
 ## Features - 產品功能
 
