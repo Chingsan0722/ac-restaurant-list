@@ -15,8 +15,7 @@ db.once('open', () => {
   let i = 0
   while (i < seedRestaurant.results.length) {
     Restaurant.create(
-      { id: `${seedRestaurant.results[i].id}`, 
-        name: `${seedRestaurant.results[i].name}`,
+      { name: `${seedRestaurant.results[i].name}`,
         name_en: `${seedRestaurant.results[i].name_en}`,
         category: `${seedRestaurant.results[i].category}`,
         image: `${seedRestaurant.results[i].image}`,

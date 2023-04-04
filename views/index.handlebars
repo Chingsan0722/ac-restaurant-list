@@ -24,6 +24,7 @@
             value="" aria-describedby="search-button">
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            {{!-- <a href="./restaurants/new" class="btn btn-primary">Create</a> --}}
           </div>
         </div>
       </form>
@@ -36,24 +37,26 @@
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
       <div class="row row-cols-sm-3">
-        {{#each restaurants}}
-        <a href="/restaurants/{{this.id}}" class="text-secondary">
-          <div class="card mb-3">
+        {{#each restaurantData}}
+        <div class="card mb-3">
+          <a href="/restaurants/{{this._id}}" class="text-secondary">
             <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
             <div class="card-body p-3">
               <h6 class="card-title mb-1">{{this.name}}</h6>
-
+              {{!-- <p class="badge badge-pill badge bg-danger font-weight-normal">
+                {{this.rating}}
+                <i class="fas fa-star fa-xs"></i>
+              </p> --}}
               <div class="restaurant-category mb-1">
                 <i class="fas fa-utensils pr-2"></i>{{this.category}}
               </div>
-              <span class="badge badge-pill badge bg-danger font-weight-normal">
-                {{this.rating}}
-                <i class="fas fa-star fa-xs"></i>
-              </span>
-
-
+              <a href="./restaurants/{{ this._id }}" class="badge bg-secondary" style="text-decoration:none">detail</a>
+              <a href="./restaurants/{{ this._id }}/edit" class="badge bg-info" style="text-decoration:none"> edit</a>
+              <form action="./restaurants/{{ this._id }}/delete" method="POST" style="display: inline;">
+                <button class="badge bg-danger" type="submit">delete</button>
+              </form>
             </div>
-          </div>
+        </div>
         </a>
         {{/each}}
       </div>
