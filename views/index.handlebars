@@ -52,7 +52,7 @@
               </div>
               <a href="./restaurants/{{ this._id }}" class="badge bg-secondary" style="text-decoration:none">detail</a>
               <a href="./restaurants/{{ this._id }}/edit" class="badge bg-info" style="text-decoration:none"> edit</a>
-              <form action="./restaurants/{{ this._id }}/delete" method="POST" style="display: inline;">
+              <form action="./restaurants/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
                 <button class="badge bg-danger" type="submit">delete</button>
               </form>
             </div>
