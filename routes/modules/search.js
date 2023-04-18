@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const Restaurant = require('../../models/restaurant')
 
 // search function
-router.get('/search', (req, res) => {
+router.get('/', (req, res) => {
   if (!req.query.keyword) {
     res.redirect('/')
   }
@@ -10,7 +11,8 @@ router.get('/search', (req, res) => {
   const keywords = req.query.keyword
   const keyword = keywords.trim().toLowerCase()
 
-  Restaurant.find()
+  return Restaurant
+    .find()
     .lean()
     .then(restaurantData => {
       const filterRestaurantData = restaurantData.filter(

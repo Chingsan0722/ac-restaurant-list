@@ -14,29 +14,33 @@
 </header>
 
 <!-- search bar -->
-<div class="container search-bar">
-  <div class="search-bar-outer">
-    <div class="search-bar-inner">
-      <form action="/search">
-        <h4 class="mb-2">尋找餐廳：</h4>
-        <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
-            value="" aria-describedby="search-button">
-          <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
-            {{!-- <a href="./restaurants/new" class="btn btn-primary">Create</a> --}}
-          </div>
-        </div>
-      </form>
+<nav class="bd-subnavbar py-2">
+  <div class="container-xxl d-flex align-items-md-center">
+    <form class="bd-search position-relative" action="/search">
+      <input type="text" name="keyword" class="form-control d-inline mt-2" style="width:80%" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
+        value="" aria-describedby="search-button">
+      <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+    </form>
+    <div class="dropdown mt-2 ms-3 ms-auto">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        排序
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="#">A - Z</a></li>
+        <li><a class="dropdown-item" href="#">Z - A</a></li>
+        <li><a class="dropdown-item" href="#">類別</a></li>
+        <li><a class="dropdown-item" href="#">地區</a></li>
+      </ul>
     </div>
   </div>
-</div>
-
+</nav>
 <!-- restaurant list -->
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
       <div class="row row-cols-sm-3">
+
         {{#each restaurantData}}
         <div class="card mb-3">
           <a href="/restaurants/{{this._id}}" class="text-secondary">
