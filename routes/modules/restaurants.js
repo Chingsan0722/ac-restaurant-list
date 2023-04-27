@@ -21,15 +21,7 @@ router.get('/:restaurantId/edit', (req, res) => {
 })
 router.put('/:restaurantId/edit', (req, res) => {
   const { restaurantId } = req.params
-  const name = req.body.name
-  const name_en = req.body.name_en
-  const category = req.body.category
-  const rating = req.body.rating
-  const location = req.body.location
-  const google_map = req.body.google_map
-  const phone = req.body.phone
-  const description = req.body.description
-  const image = req.body.image
+  const { name, name_en, category, rating, location, google_map, phone, description, image } = req.body
   return Restaurant.findById(restaurantId)
     .then(restaurant => {
       restaurant.name = name,
