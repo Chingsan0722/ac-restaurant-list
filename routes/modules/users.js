@@ -22,8 +22,8 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
   const errors = []
-  if (!name || !email || !password || !confirmPassword) {
-    errors.push({ message: '所有欄位都是必填！' })
+  if (!email || !password || !confirmPassword) {
+    errors.push({ message: '姓名以外的欄位都是必填！' })
   }
   if(password !== confirmPassword){
     errors.push({ message: '密碼不相符！' })
@@ -52,6 +52,7 @@ router.post('/register', (req, res) => {
         email,
         password
       })
+      .then(req.flash('success_msg', '您已成功註冊！'))
       .then(res.redirect('/users/login'))
       .catch(err => console.log(err))
   })
@@ -61,7 +62,7 @@ router.post('/register', (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.logOut()
-  // req.flash('success_msg', '您已成功登出！')
+  req.flash('success_msg', '您已成功登出！')
   res.redirect('/users/login')
 })
 

@@ -13,24 +13,22 @@
 
 <header>
   <!-- navigation -->
-  <nav class="navbar navbar-light bg-light justify-content-between">
-    <div class="container">
-      <a class="navbar-brand" href="/">
-        <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
-          width="30" height="30" class="d-inline-block align-top" alt="好。吃">
-        我的餐廳清單
-      </a>
-      <div>
-        {{!-- {{#if}} --}}
-        <a class="btn btn-outline-dark" href="/restaurants/new">Create</a>
-        {{!-- <a class="btn btn-dark" href="/users/logout">Logout</a> --}}
-        {{!-- {{else}} --}}
-        {{!-- <a class="btn btn-dark" href="/users/login">Login</a> --}}
-        {{!-- {{/if}} --}}
-      </div>
+  <nav class="navbar navbar-light bg-light justify-content-between p-2">
+    <a class="navbar-brand" href="/">
+      <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png" width="30"
+        height="30" class="d-inline-block align-top" alt="好。吃">
+      {{#if isAuthenticated}}{{ user.email }}{{/if}}的餐廳清單
+    </a>
+    <div>
+      {{#if isAuthenticated}}
+      <a class="btn btn-secondary" href="/todos/new">Create</a>
+      <a class="btn btn-dark" href="/users/logout">Logout</a>
+      {{else}}
+      <a class="btn btn-dark" href="/users/login">Login</a>
+      {{/if}}
     </div>
   </nav>
-  <div class="banner"></div>
+  {{!-- <div class="banner"></div> --}}
 </header>
 
 <body>
