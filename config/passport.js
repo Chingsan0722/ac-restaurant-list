@@ -5,7 +5,7 @@ const LocalStrategy = require('passport-local').Strategy
 const FacebookStrategy = require('passport-facebook').Strategy
 // 載入 User model 因為下方有用到
 const User = require('../models/user')
-
+const bcrypt = require('bcryptjs')
 module.exports = app => {
   // 初始化 Passport 模組
   app.use(passport.initialize())
@@ -17,44 +17,59 @@ module.exports = app => {
     User.findOne({ email })
       .then(user => {
         // 驗證成功but：未找到相關資料
-        if(!user) {
+        if (!user) {
           return done(null, false, { message: 'This email is not registered!' })
-        } else if (user.password !== password){
-          // 驗證成功but：帳號或密碼錯誤
-          return done(null, false, { message: 'Email or Password incorrect.' })
-        }   
-          // 驗證成功and使用者存在
+        }
+        return bcrypt.compare(password, user.password).then(isMatch => {
+          if (!isMatch) {
+            // 驗證成功but：帳號或密碼錯誤
+            return done(null, false, { message: 'Email or Password incorrect.' })
+          }
           return done(null, user)
         })
-      //驗證失敗
-      .catch(err => done(err,false))
-  }))}
+          //驗證失敗
+          .catch(err => done(err, false))
+      })
+  }))
 
   passport.use(new FacebookStrategy({
-    clientID: '943077803452147',
-    clientSecret: 'd0361d75a240d1f274c5567bedbb39ff',
-    callbackURL: 'http://localhost:3000/auth/facebook/callback',
+    clientID: process.env.clientID,
+    clientSecret: process.env.clientSecret,
+    callbackURL: process.env.callbackURL,
     profileFields: ['email', 'displayName']
   }, (accessToken, refreshToken, profile, done) => {
-  const { name, email } = profile._json
-  User.findOne({ email })
-    .then(user => {
-      if (user) return done(null, user)
-      // 幫facebook做一組密碼儲存起來
-      // toString(36)代表eng26+num10 slice(-8)代表取小數點最後八位
-      const randomPassword = Math.random().toString(36).slice(-8)
-    })
-}))
-  // 設定序列化與反序列化
+    const { name, email } = profile._json
+    User.findOne({ email })
+      .then(user => {
+        if (!user) {
+          const randomPassword = Math.random().toString(36).slice(-8)
+          bcrypt
+            .genSalt(10)
+            .then(salt => bcrypt.hash(randomPassword, salt))
+            .then(hash => User.create({
+              name,
+              email,
+              password: hash
+            }))
+        }
+        return done(null, user)
+        // 幫facebook做一組密碼儲存起來
+        // toString(36)代表eng26+num10 slice(-8)代表取小數點最後八位
+      }
+      )
+  })
+  )
+}
+// 設定序列化與反序列化
 
-  // 序列化從user去找出user.id
-  passport.serializeUser((user, done) => {
-    done(null, user.id)
-  })
-  // 反序列化從id去找出user資料
-  passport.deserializeUser((id, done) => {
-    User.findById(id)
-      .lean()
-      .then(user => done(null, user))
-      .catch(err => done(err, null))
-  })
+// 序列化從user去找出user.id
+passport.serializeUser((user, done) => {
+  done(null, user.id)
+})
+// 反序列化從id去找出user資料
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .lean()
+    .then(user => done(null, user))
+    .catch(err => done(err, null))
+})

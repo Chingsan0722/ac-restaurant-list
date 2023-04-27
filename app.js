@@ -17,7 +17,7 @@ require('./config/mongoose')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(session({
-  secret: 'process.env.sessionSecret',
+  secret: process.env.sessionSecret,
   resave: false,
   saveUninitialized: true
 }))

@@ -25,11 +25,11 @@ router.post('/register', (req, res) => {
   if (!email || !password || !confirmPassword) {
     errors.push({ message: '姓名以外的欄位都是必填！' })
   }
-  if(password !== confirmPassword){
+  if (password !== confirmPassword) {
     errors.push({ message: '密碼不相符！' })
   }
-  if( errors.length ) {
-    return res.render( 'register', {
+  if (errors.length) {
+    return res.render('register', {
       errors,
       name,
       email,
@@ -46,18 +46,23 @@ router.post('/register', (req, res) => {
         email,
         password,
         confirmPassword
-      })} 
-      User.create({
+      })
+    }else{
+     return bcrypt
+      .genSalt(10)
+      .then(salt => bcrypt.hash(password, salt))
+      .then(hash => User.create({
         name,
         email,
-        password
-      })
-      .then(req.flash('success_msg', '您已成功註冊！'))
-      .then(res.redirect('/users/login'))
+        password: hash
+      })) 
       .catch(err => console.log(err))
-  })
-  .catch(err => console.log(err))
+       .then(req.flash('success_msg', '您已成功註冊！'))
+       .then(res.redirect('/users/login'))
+    }})
+    .catch(err => console.log(err))
 })
+
 
 
 router.get('/logout', (req, res) => {
