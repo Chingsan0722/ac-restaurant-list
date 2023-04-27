@@ -4,7 +4,8 @@ const exphbs = require('express-handlebars')
 const app = express()
 const port = 3000
 const methodOverride = require('method-override')
-
+const session = require('express-session')
+const usePassport = require('./config/passport')
 // 載入 Restaurant model
 const Restaurant = require('./models/restaurant')
 
@@ -16,6 +17,11 @@ require('./config/mongoose')
 // setting template engine here
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+app.use(session({
+  secret: 'process.env.sessionSecret',
+  resave: false,
+  saveUninitialized: true
+}))
 
 // setting static files 載入靜態檔案
 app.use(express.static('public'))
@@ -23,6 +29,8 @@ app.use(express.static('public'))
 // 用app.use 讓每一筆請求都透過body-parser與methodOverride進行前置處理
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+usePassport(app)
+
 app.use(routes)
 
 // start and listen express server
