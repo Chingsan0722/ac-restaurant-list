@@ -11,9 +11,11 @@
 
 ## Features - 產品功能
 
-1. 使用者可以瀏覽全部所有餐廳
+1. 使用者可以瀏覽所有餐廳
 2. 使用者可以點擊任一餐廳，查看更多餐廳資訊，如地址、電話與簡介
 3. 使用者可以依照中文名稱、英文名稱與餐廳類別進行搜尋
+4. 使用者可以編輯餐廳內容
+5. 使用者可以使用排序功能(建置中，目前僅限主頁)
 
 ## Environment SetUp - 環境建置
 
@@ -54,7 +56,7 @@ nodemon app.js
 7. 當 terminal 出現以下字樣，表示伺服器與資料庫已啟動並成功連結
 
 ```
-now server begins running on http://localhost:3000
+App i 1s running on http://localhost:3000
 
 ```
 
