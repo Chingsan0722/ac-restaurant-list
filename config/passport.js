@@ -1,6 +1,8 @@
 const passport = require('passport')
 // 注意第二行設定和一般的引用不太一樣，需要再多傳入一個 Strategy 物件，這是在官網說明裡找到的指定寫法
 const LocalStrategy = require('passport-local').Strategy
+// facebook
+const FacebookStrategy = require('passport-facebook').Strategy
 // 載入 User model 因為下方有用到
 const User = require('../models/user')
 
@@ -28,6 +30,21 @@ module.exports = app => {
       .catch(err => done(err,false))
   }))}
 
+  passport.use(new FacebookStrategy({
+    clientID: '943077803452147',
+    clientSecret: 'd0361d75a240d1f274c5567bedbb39ff',
+    callbackURL: 'http://localhost:3000/auth/facebook/callback',
+    profileFields: ['email', 'displayName']
+  }, (accessToken, refreshToken, profile, done) => {
+  const { name, email } = profile._json
+  User.findOne({ email })
+    .then(user => {
+      if (user) return done(null, user)
+      // 幫facebook做一組密碼儲存起來
+      // toString(36)代表eng26+num10 slice(-8)代表取小數點最後八位
+      const randomPassword = Math.random().toString(36).slice(-8)
+    })
+}))
   // 設定序列化與反序列化
 
   // 序列化從user去找出user.id
