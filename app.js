@@ -30,6 +30,8 @@ app.listen(port, () => {
   console.log(`App is running on http://localhost:${port}`)
 })
 
+//git test
+
 // new restaurant page
 // app.get('/restaurants/new', (req, res) => {
 //   return res.render('new')
