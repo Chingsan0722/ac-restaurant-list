@@ -2,6 +2,28 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
+// create page
+router.get('/new', (req, res) => {
+  res.render('new')
+})
+
+router.post('/new', (req, res) => {
+  const { name, name_en, category, rating, location, google_map, phone, description, image } = req.body
+  Restaurant.create(
+    {
+      name,
+      name_en,
+      category,
+      rating,
+      location,
+      google_map,
+      phone,
+      description,
+      image
+    })
+  return res.redirect('/')
+})
+
 // show page & detail page
 router.get('/:restaurantId', (req, res) => {
   const { restaurantId } = req.params

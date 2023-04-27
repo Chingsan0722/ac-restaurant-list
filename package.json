@@ -21,6 +21,7 @@
     "nodemon": "^2.0.21"
   },
   "devDependencies": {
+    "concurrently": "^8.0.1",
     "dotenv": "^16.0.3"
   }
 }
