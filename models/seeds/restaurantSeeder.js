@@ -29,11 +29,10 @@ db.once('open', () => {
           }))
         .then((user) => {
           const userId = user._id
-          const json = seedRestaurant.results
           return Promise.all(
             Array.from(
-            seedRestaurant.slice(index * 3, index * 3 + 3),
-            (restaurant) => Restaurant.create({ ...restaurant, userId })
+              seedRestaurant.slice(index * 3, index * 3 + 3),
+              (restaurant) => Restaurant.create({ ...restaurant, userId })
             )
           )
         })

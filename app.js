@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 usePassport(app)
 
-//掛載flash製作警示訊息
+// 掛載flash製作警示訊息
 app.use(flash())
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()

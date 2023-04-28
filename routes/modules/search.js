@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     return res.redirect('/')
   }
   return Restaurant
-    .find({userId})
+    .find({ userId })
     .lean()
     .then(restaurantData => {
       const filterRestaurantData = restaurantData.filter(

@@ -27,7 +27,7 @@ module.exports = app => {
           }
           return done(null, user)
         })
-          //驗證失敗
+          // 驗證失敗
           .catch(err => done(err, false))
       })
   }))

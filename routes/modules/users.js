@@ -4,7 +4,6 @@ const User = require('../../models/user')
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
 
-
 // 登入頁面
 router.get('/login', (req, res) => {
   res.render('login')
@@ -46,22 +45,22 @@ router.post('/register', (req, res) => {
         password,
         confirmPassword
       })
-    }else{
-     return bcrypt
-      .genSalt(10)
-      .then(salt => bcrypt.hash(password, salt))
-      .then(hash => User.create({
-        name,
-        email,
-        password: hash
-      })) 
-      .catch(err => console.log(err))
-       .then(req.flash('success_msg', '您已成功註冊！'))
-       .then(res.redirect('/users/login'))
-    }})
+    } else {
+      return bcrypt
+        .genSalt(10)
+        .then(salt => bcrypt.hash(password, salt))
+        .then(hash => User.create({
+          name,
+          email,
+          password: hash
+        }))
+        .catch(err => console.log(err))
+        .then(req.flash('success_msg', '您已成功註冊！'))
+        .then(res.redirect('/users/login'))
+    }
+  })
     .catch(err => console.log(err))
 })
-
 
 // 登出功能
 router.get('/logout', (req, res) => {
