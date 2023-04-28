@@ -46,11 +46,11 @@ router.get('/:restaurantId/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 router.put('/:restaurantId/edit', (req, res) => {
-  const userId = req.user._id
+  const userId = req.params.restaurantId
   const newRestaurant = req.body;
   Restaurant
     .findByIdAndUpdate(userId, { ...newRestaurant })
-    .then(() => res.redirect(`/restaurants/${restaurantId}`))
+    .then(() => res.redirect(`/restaurants/${userId}`))
     .catch(error => console.log(error))
 })
 
@@ -58,7 +58,8 @@ router.put('/:restaurantId/edit', (req, res) => {
 router.delete('/:restaurantId', (req, res) => {
   const userId = req.user._id
   const restaurantId = req.params.id
-  // const deleteButton =
+  alert('are you sure?')
+  console.log(deleteButton)
   return Restaurant.findOne({ restaurantId, userId })
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))

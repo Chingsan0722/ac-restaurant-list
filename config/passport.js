@@ -13,17 +13,17 @@ module.exports = app => {
   // 設定本地登入策略，usernameField: 'email' 代表要驗證的為User資料中的email
   // 後方引入email, password, done 參數，其中done為passport專門設計的method
   // 用來回應驗證是否成功
-  passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+  passport.use(new LocalStrategy({ usernameField: 'email', passReqToCallback: true }, (req,email, password, done) => {
     User.findOne({ email })
       .then(user => {
         // 驗證成功but：未找到相關資料
         if (!user) {
-          return done(null, false, { message: 'This email is not registered!' })
+          return done(null, false, req.flash('warning_msg', '找不到該電子信箱'))
         }
         return bcrypt.compare(password, user.password).then(isMatch => {
           if (!isMatch) {
             // 驗證成功but：帳號或密碼錯誤
-            return done(null, false, { message: 'Email or Password incorrect.' })
+            return done(null, false, req.flash('warning_msg', '帳號或密碼錯誤'))
           }
           return done(null, user)
         })
