@@ -37,6 +37,15 @@ const restaurantSchema = new Schema({
   description: {
     type: String,
     required: true
+  },
+  userId: {  // 加入關聯設定
+    // type: Schema.Types.ObjectId = 去參照 User 的 ObjectId
+    type: Schema.Types.ObjectId,
+    // ref: 'User' = 定義對象是User model
+    ref: 'User',
+    // 把index: true = userId 設定成「索引」
+    index: true,
+    required: true
   }
 })
 
