@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const User = require('../../models/user')
 const passport = require('passport')
-// 雜湊密碼套件
 const bcrypt = require('bcryptjs')
 
 
@@ -64,7 +63,7 @@ router.post('/register', (req, res) => {
 })
 
 
-
+// 登出功能
 router.get('/logout', (req, res) => {
   req.logOut()
   req.flash('success_msg', '您已成功登出！')

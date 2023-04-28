@@ -53,8 +53,6 @@ module.exports = app => {
             }))
         }
         return done(null, user)
-        // 幫facebook做一組密碼儲存起來
-        // toString(36)代表eng26+num10 slice(-8)代表取小數點最後八位
       }
       )
   })

@@ -2,17 +2,16 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
-// search function
+// 搜尋功能
 router.get('/', (req, res) => {
-  if (!req.query.keyword) {
-    res.redirect('/')
-  }
-
   const keywords = req.query.keyword
   const keyword = keywords.trim().toLowerCase()
-
+  const userId = req.user._id
+  if (!req.query.keyword) {
+    return res.redirect('/')
+  }
   return Restaurant
-    .find()
+    .find({userId})
     .lean()
     .then(restaurantData => {
       const filterRestaurantData = restaurantData.filter(

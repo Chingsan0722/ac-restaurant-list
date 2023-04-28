@@ -1,21 +1,23 @@
 # 我的餐廳清單
 
-一個使用 Node.js + Express 打造的餐廳美食網站，目前的功能為能夠瀏覽各個餐廳的介紹，並且透過搜尋功能找到喜歡的餐廳類型或名稱
+一個使用 Node.js + Express 打造的餐廳美食網站，儲存自己喜歡的餐廳，並且透過搜尋功能找到喜歡的餐廳類型或名稱
 
 
 ## 專案畫面
 
-![image](https://github.com/Chingsan0722/ac-restaurant-list/blob/main/homepage.png)
+![image](https://github.com/Chingsan0722/ac-restaurant-list/blob/main/snapshots/login_page.png)
 
-![image](https://github.com/Chingsan0722/ac-restaurant-list/blob/main/description.png)
+![image](https://github.com/Chingsan0722/ac-restaurant-list/blob/main/snapshots/user_page.png)
 
 ## Features - 產品功能
 
-1. 使用者可以瀏覽所有餐廳
-2. 使用者可以點擊任一餐廳，查看更多餐廳資訊，如地址、電話與簡介
-3. 使用者可以依照中文名稱、英文名稱與餐廳類別進行搜尋
-4. 使用者可以編輯餐廳內容
-5. 使用者可以使用排序功能(建置中，目前僅限主頁)
+1. 使用者可以創建自己的帳號，也可選擇FB登入
+2. 使用者可以瀏覽所有自己的餐廳
+3. 使用者可以新增餐廳
+4. 使用者可以點擊任一餐廳，查看更多餐廳資訊，如地址、電話與簡介
+5. 使用者可以依照中文名稱、英文名稱與餐廳類別進行搜尋
+6. 使用者可以編輯餐廳內容
+7. 使用者可以使用排序功能(建置中，搜尋後無法使用)
 
 ## Environment SetUp - 環境建置
 
@@ -40,11 +42,10 @@ cd restaurantList
 ```
 在 Terminal 輸入 npm install 指令
 ```
-
-4. 安裝 nodemon 套件
+4. 載入種子資料
 
 ```
-在 Terminal 輸入 nodemon app.js 指令
+npm run seed
 ```
 
 5. 啟動伺服器，執行 app.js 檔案
@@ -53,12 +54,16 @@ cd restaurantList
 nodemon app.js
 ```
 
-7. 當 terminal 出現以下字樣，表示伺服器與資料庫已啟動並成功連結
+6. 當 terminal 出現以下字樣，表示伺服器與資料庫已啟動並成功連結
 
 ```
 App i 1s running on http://localhost:3000
-
 ```
+
+7. 使用建立好的種子使用者登入
+
+帳號：user1@example.com
+密碼：12345678
 
 現在，你可開啟任一瀏覽器瀏覽器輸入 [http://localhost:3000](http://localhost:3000) 開始使用我的餐廳清單囉！
 
