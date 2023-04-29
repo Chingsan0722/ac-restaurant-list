@@ -34,13 +34,13 @@ git clone https://github.com/Chingsan0722/ac-restaurant-list.git
 2. 開啟終端機(Terminal)，進入存放此專案的資料夾
 
 ```
-cd restaurantList
+cd restaurant-list2
 ```
 
-3. 安裝 npm 套件
+3. 安裝 npm 套件，在 Terminal 輸入
 
 ```
-在 Terminal 輸入 npm install 指令
+ npm install
 ```
 4. 載入種子資料
 
